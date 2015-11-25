@@ -8,15 +8,15 @@ public class Nodo {
 	String texto;
 	
 	//Constructor de los nodos internos(ramas).
-	public Nodo(Nodo nodoDer, Nodo nodoIzq){
+	public Nodo(Nodo nodoIzq, Nodo nodoDer){
 		this.nodoDer=nodoDer;
 		this.nodoIzq=nodoIzq;
-		longitud=nodoDer.longitud+nodoIzq.longitud;
+		longitud=nodoDer.getLongitud()+nodoIzq.getLongitud();
 		
-		if(nodoDer.altura<nodoIzq.altura){
-			altura=nodoIzq.altura+1;
+		if(nodoDer.getAltura()<nodoIzq.getAltura()){
+			altura=nodoIzq.getAltura()+1;
 		} else {
-			altura=nodoDer.altura;
+			altura=nodoDer.getAltura()+1;
 		}
 		
 	}
@@ -29,8 +29,16 @@ public class Nodo {
 	}
 	
 	//metodo para acceder al caracter i-esimo
-	public void accesoCaracter(int posicion){
-		
+	public char accesoCaracter(int posicion){
+		if(this.getAltura()==0){
+			return this.getTexto().charAt(posicion);
+		} else {
+			if (this.getNodoIzq().getLongitud()-1 >= posicion) {
+				return this.getNodoIzq().accesoCaracter(posicion);
+			} else {
+				return this.getNodoDer().accesoCaracter(posicion - this.getNodoIzq().longitud);
+			}
+		}
 	}
 	
 	//devuelve un arbol equilibrado del arbol que "desciende" de la raiz que le pasas
@@ -39,12 +47,34 @@ public class Nodo {
 	}
 	
 	//concatenacion opcion 1 (esta me mola mas):
-	public static Nodo concatenar1(Nodo nodoDer, Nodo nodoIzq){
-		return new Nodo(nodoDer,nodoIzq);
+	public static Nodo concatenar(Nodo nodoIzq, Nodo nodoDer){
+		return new Nodo(nodoIzq,nodoDer);
 	}
 	
 	//concatenacion opcion 2:
-	public Nodo concatenar2(Nodo nodoIzq){
-		return new Nodo(this,nodoIzq);
+	public Nodo concatenar(Nodo nodoDer){
+		return new Nodo(this,nodoDer);
 	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public int getLongitud() {
+		return longitud;
+	}
+
+	public Nodo getNodoDer() {
+		return nodoDer;
+	}
+
+	public Nodo getNodoIzq() {
+		return nodoIzq;
+	}
+
+	public String getTexto() {
+		return texto;
+	}
+
+
 }
