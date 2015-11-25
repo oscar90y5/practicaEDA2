@@ -1,3 +1,11 @@
+/**
+ *
+ * @author Iván Castaño Fernández
+ * @author Óscar Fernández Angulo
+ *
+ */
+
+import java.util.ArrayList;
 
 public class Nodo {
 	
@@ -42,10 +50,35 @@ public class Nodo {
 	}
 	
 	//devuelve un arbol equilibrado del arbol que "desciende" de la raiz que le pasas
-	public Nodo balanceado(Nodo raiz){
-		return new Nodo("patata");	//no me mola que me salgan errores xD
+	public Nodo balanceado(){
+		Pila<Nodo> pila = new Pila();
+		ArrayList<Nodo> lista =new ArrayList<>();
+		Nodo aux;
+		pila.insertar(this);
+		while(!pila.estaVacia()){
+			aux = pila.extraer();
+			if(aux.getAltura()==0){
+				lista.add(aux);
+			} else {
+				pila.insertar(aux.getNodoDer());
+				pila.insertar(aux.getNodoIzq());
+			}
+		}
+		return arbolizar(lista);
+
 	}
-	
+
+	private Nodo arbolizar(ArrayList<Nodo> lista){
+		if(lista.size()==1){
+			return lista.remove(0);
+		} else {
+
+			return new Nodo(arbolizar( new ArrayList<> (lista.subList((int) (lista.size() / 2), lista.size()))),
+					arbolizar(new ArrayList<> (lista.subList(0, (int) (lista.size() / 2)))));
+
+		}
+	}
+
 	//concatenacion opcion 1 (esta me mola mas):
 	public static Nodo concatenar(Nodo nodoIzq, Nodo nodoDer){
 		return new Nodo(nodoIzq,nodoDer);
