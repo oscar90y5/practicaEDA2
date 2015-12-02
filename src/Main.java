@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * 
  * @author Iván Castaño Fernández
@@ -9,29 +7,56 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
-		Nodo nodo1 = new Nodo("Comeme ");
-		Nodo nodo2 = new Nodo("los ");
-		Nodo nodo3 = new Nodo("huevos.");
-		Nodo nodo4 = new Nodo("huevos.");
-		Nodo nodo5 = new Nodo("huevos.");
-		Nodo nodo6 = new Nodo("huevos.");
-		Nodo nodo7 = new Nodo("huevos.");
-		Nodo nodo8 = new Nodo("huevos.");
+		//Prueba que nos pasais en el enunciado de la practica.
+		long tpo1,tpo2,tpo3,tpo4;
+		int huella;
+		System.out.println("PRUEBA CON STRING");
+		tpo1 = System.currentTimeMillis();
+		String cad = "";
+		for(int i = 1; i < 30000; i++) {
+			cad += "Este es un ejemplo de lo que puede ser una cadena de texto, en este caso estamos hablando de la linea numero "+i;
+		}
+		tpo2 = System.currentTimeMillis();
+		huella = 0;
+		for(int i = 0; i < cad.length();
+			i++) {
+			huella = huella*23 + cad.charAt(i);
+		}
+		tpo3 = System.currentTimeMillis();
+		System.out.println("Concatenar: "+(tpo2
+				-
+				tpo1)+" mseg.");
+		System.out.println("Recorrer: "+(tpo3
+				-
+				tpo2)+" mseg.");
+		System.out.println("Huella = "+huella);
+		System.out.println();
+		System.out.println("PRUEBA CON ROPES");
+		tpo1 = System.currentTimeMillis();
+		Nodo rop = new Nodo("");
+		for(int i = 1; i < 30000; i++) {
+			rop = rop.concatenar(new Nodo("Este es un ejemplo de lo que puede ser una cadena de texto, en este caso estamos hablando de la linea numero "+i));
+		}
+		tpo2 = System.currentTimeMillis();
+		rop = rop.balanceado();
+		tpo3 = System.currentTimeMillis();
+		huella = 0;
+		for(int i = 0; i < rop.getLongitud(); i++) {
+			huella = huella*23 + rop.accesoCaracter(i);
+		}
+		tpo4 = System.currentTimeMillis();
+		System.out.println("Concatenar: "+(tpo2
+				-
+				tpo1)+" mseg.");
+		System.out.println("Balancear: "+(tpo3
+				-
+				tpo2)+" mseg.");
+		System.out.println("Recorrer: "+(tpo4
+				-
+				tpo3)+" mseg.");
+		System.out.println("Huella = "+huella);
 
 
-		Nodo raiz1 = new Nodo(nodo7,nodo8);
-		Nodo raiz2 = new Nodo(nodo6,raiz1);
-		Nodo raiz3 = new Nodo(nodo5,raiz2);
-		Nodo raiz4 = new Nodo(nodo4,raiz3);
-		Nodo raiz5 = new Nodo(nodo3,raiz4);
-		Nodo raiz6 = new Nodo(nodo2,raiz5);
-		Nodo raiz = new Nodo(nodo1,raiz6);
-
-		System.out.println(""+raiz.getAltura());
-
-		raiz=raiz.balanceado();
-
-		System.out.println(""+raiz.getAltura());
 
 	}
 

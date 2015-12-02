@@ -7,6 +7,7 @@
 
 import java.util.ArrayList;
 
+
 public class Nodo {
 	
 	int altura;
@@ -14,8 +15,13 @@ public class Nodo {
 	Nodo nodoIzq;
 	int longitud;
 	String texto;
-	
-	//Constructor de los nodos internos(ramas).
+
+	/**
+	 * Constructor de los nodos internos.
+	 * Calcula la altura y la longitud con los nodos.
+	 * @param nodoIzq nodo izquierdo a concatenar.
+	 * @param nodoDer nodo derecho a concatenar.
+     */
 	public Nodo(Nodo nodoIzq, Nodo nodoDer){
 		this.nodoDer=nodoDer;
 		this.nodoIzq=nodoIzq;
@@ -28,15 +34,22 @@ public class Nodo {
 		}
 		
 	}
-	
-	//Constructor de los nodos externos(hojas).
+
+	/**
+	 * Constructor de los nodos externos (hojas).
+	 * @param texto cadena de caracteres que deseamos guardar en el nodo.
+     */
 	public Nodo(String texto){
 		this.texto=texto;
 		longitud=texto.length();
 		altura=0;
 	}
-	
-	//metodo para acceder al caracter i-esimo
+
+	/**
+	 * Acceso al caracter i-esimo.
+	 * @param posicion del caracter que deseamos conocer.
+	 * @return caracter i-esimo.
+     */
 	public char accesoCaracter(int posicion){
 		if(this.getAltura()==0){
 			return this.getTexto().charAt(posicion);
@@ -48,8 +61,11 @@ public class Nodo {
 			}
 		}
 	}
-	
-	//devuelve un arbol equilibrado del arbol que "desciende" de la raiz que le pasas
+
+	/**
+	 * Metodo que equilibra el arbol descendiente de la raiz que lo llama.
+	 * @return nodo raiz del arbol equilibrado.
+     */
 	public Nodo balanceado(){
 		Pila<Nodo> pila = new Pila();
 		ArrayList<Nodo> lista =new ArrayList<>();
@@ -68,23 +84,37 @@ public class Nodo {
 
 	}
 
+	/**
+	 * Convierte la lista de nodos que le pasas por parametro en un arbol equilibrado.
+	 * @param lista de nodos ordenados.
+	 * @return nodo raiz del arbol equilibrado.
+     */
 	private Nodo arbolizar(ArrayList<Nodo> lista){
 		if(lista.size()==1){
 			return lista.remove(0);
 		} else {
 
-			return new Nodo(arbolizar( new ArrayList<> (lista.subList((int) (lista.size() / 2), lista.size()))),
-					arbolizar(new ArrayList<> (lista.subList(0, (int) (lista.size() / 2)))));
+			return new Nodo(arbolizar( new ArrayList<>(lista.subList(0, (int) (lista.size() / 2))) ),
+					arbolizar(new ArrayList<> (lista.subList((int) (lista.size() / 2), lista.size()))));
 
 		}
 	}
 
-	//concatenacion opcion 1 (esta me mola mas):
+	/**
+	 * Concatena dos nodos.
+	 * @param nodoIzq nodo que queremos tener en la posicion de la izquierda.
+	 * @param nodoDer nodo que queremos tener en la posicion de la derecha.
+     * @return devuelve el nodo raiz de los nodos concatenados.
+     */
 	public static Nodo concatenar(Nodo nodoIzq, Nodo nodoDer){
 		return new Nodo(nodoIzq,nodoDer);
 	}
-	
-	//concatenacion opcion 2:
+
+	/**
+	 * Concatena el nodo que lo llama, en la posicion de la izquierda, con el nodo que le pasas por parametro.
+	 * @param nodoDer nodo que queremos tener en la posicion de la derecha.
+	 * @return devuelve el nodo raiz de los nodos concatenados.
+	 */
 	public Nodo concatenar(Nodo nodoDer){
 		return new Nodo(this,nodoDer);
 	}
