@@ -139,5 +139,13 @@ public class Nodo {
 		return texto;
 	}
 
+	public String pasaString () {
+		if(this.getAltura()==0){
+			return this.getTexto();
+		} else {
+			return this.getNodoIzq().pasaString()+this.getNodoDer().pasaString();
+		}
+	}
+
 
 }

@@ -8,12 +8,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		//Prueba que nos pasais en el enunciado de la practica.
-		long tpo1,tpo2,tpo3,tpo4;
+		/*long tpo1,tpo2,tpo3,tpo4;
 		int huella;
 		System.out.println("PRUEBA CON STRING");
 		tpo1 = System.currentTimeMillis();
 		String cad = "";
-		for(int i = 1; i < 30000; i++) {
+		for(int i = 1; i < 60000; i++) {
 			cad += "Este es un ejemplo de lo que puede ser una cadena de texto, en este caso estamos hablando de la linea numero "+i;
 		}
 		tpo2 = System.currentTimeMillis();
@@ -34,7 +34,7 @@ public class Main {
 		System.out.println("PRUEBA CON ROPES");
 		tpo1 = System.currentTimeMillis();
 		Nodo rop = new Nodo("");
-		for(int i = 1; i < 30000; i++) {
+		for(int i = 1; i < 60000; i++) {
 			rop = rop.concatenar(new Nodo("Este es un ejemplo de lo que puede ser una cadena de texto, en este caso estamos hablando de la linea numero "+i));
 		}
 		tpo2 = System.currentTimeMillis();
@@ -57,7 +57,15 @@ public class Main {
 		System.out.println("Huella = "+huella);
 
 
+		*/
 
+		Nodo a = new Nodo("ABC");
+		Nodo b = new Nodo("DE");
+		Nodo c = new Nodo("");
+		Nodo d = new Nodo("FEG");
+		Nodo raiz = Nodo.concatenar(Nodo.concatenar(a,Nodo.concatenar(b,c)),d);
+		raiz=raiz.balanceado();
+		System.out.println(raiz.pasaString());
 	}
 
 }
